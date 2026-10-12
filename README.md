@@ -16,6 +16,15 @@ npm run demo         # a fake galaxy with every state, nothing runs
 
 It opens `http://127.0.0.1:4848`. Use `--port <n>` for another port and `--no-open` to skip the browser.
 
+### Start it with your session (Linux)
+
+```bash
+bash scripts/install-service.sh            # a systemd user service: always up on http://127.0.0.1:4848
+bash scripts/install-service.sh --remove   # undo
+```
+
+It records the absolute paths of `node` and `claude` (systemd does not read your shell profile, so nvm installs work too). `systemctl --user status gargantua` shows it; `journalctl --user -u gargantua` its log.
+
 ## What you see
 
 | | |
