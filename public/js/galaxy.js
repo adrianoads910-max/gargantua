@@ -80,9 +80,10 @@ function createGalaxy(opts = {}) {
     const now = Date.now();
     for (const pl of planets.values()) {
       pl.fall = fallOf(pl.s, now, spanMin);
+      if (pl.forced) pl.fall = Math.max(pl.fall, clamp01((now - pl.forced.at) / pl.forced.ms)); // the tour shows a whole fall in seconds
       const want = pl.R0 + (HORIZON_R - pl.R0) * pl.fall;
       if (pl.R == null) pl.R = pl.fall > 0 ? want : pl.R0 + 14; // a new session flies in from outside
-      pl.R += (want - pl.R) * (1 - Math.exp(-dt * 0.35));
+      pl.R += (want - pl.R) * (1 - Math.exp(-dt * (pl.forced ? 1.6 : 0.35)));
       pl.fx = horizonFx(pl.R);
       pl.angle += dt * 1.4 / Math.pow(Math.max(pl.R, 2), 1.5) * pl.fx.dil;
       // spin: a working session turns faster, a closed one almost stops, and near the horizon time freezes it
@@ -440,5 +441,7 @@ function createGalaxy(opts = {}) {
     return { shown, falling, moons };
   }
 
-  return { update, draw, posOf, sizeOf, findMoon, planets, ship, stats, get snap() { return snap; } };
+  function forceFall(id, seconds) { const pl = planets.get(id); if (pl) pl.forced = { at: Date.now(), ms: seconds * 1000 }; }
+
+  return { update, draw, posOf, sizeOf, findMoon, planets, ship, stats, forceFall, get snap() { return snap; } };
 }

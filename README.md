@@ -85,6 +85,15 @@ flowchart LR
 - Sending a prompt needs a per-run `SameSite=Strict` cookie, a custom header and a local Origin, so no other website can trigger it.
 - The prompt is passed to `claude` as a single argument, never through a shell. Secrets that look like tokens are masked in what the page shows.
 
+## Recording a video
+
+`?tour` plays a scripted camera tour of about 37 seconds: around the hole, into a working session with its panel, its moons, a still session falling in (sped up), the ship flying to whoever needs you, and the ship lost at the horizon. Start your screen recorder, then press `Space`. `R` restarts, `?legenda=1` burns in Portuguese captions. For a vertical (9:16) video:
+
+```bash
+npm run demo -- --port 4849 --no-open
+google-chrome --app="http://127.0.0.1:4849/?tour" --window-size=540,960
+```
+
 ## Development
 
 ```bash

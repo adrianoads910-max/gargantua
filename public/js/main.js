@@ -267,5 +267,5 @@
   }
   requestAnimationFrame(loop);
 
-  window.__gargantua = { cam, galaxy, setFocus, ui };
+  window.__gargantua = { cam, galaxy, setFocus, setPilot, ui, panel };
 })();

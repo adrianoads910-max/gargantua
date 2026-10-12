@@ -197,3 +197,21 @@ body.piloting .hint { color: #cde9ff; }
   color: #ffe3d2; background: rgba(30, 12, 6, .78); border: 1px solid rgba(255, 150, 110, .45); backdrop-filter: blur(10px); }
 @media (max-width: 760px) { .hangar { top: auto; bottom: 16px; left: 16px; width: auto; } #ships { flex-direction: row; } .shipopt small { display: none; } }
 .vol-hint[hidden], [hidden] { display: none !important; }
+
+/* ?tour: a scripted camera tour for recording */
+body.tour .hangar, body.tour .legend, body.tour .hint, body.tour .near, body.tour .demo, body.tour #tip { display: none !important; }
+body.tour .panel { max-height: 44vh; }
+.tour-hint { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 9; padding: 14px 20px; border-radius: 14px; font: 14px var(--font); color: var(--ink);
+  background: rgba(10, 8, 7, .85); border: 1px solid var(--line); text-align: center; }
+.tour-caption { position: fixed; left: 6vw; right: 6vw; bottom: 9vh; z-index: 7; text-align: center; font: 700 clamp(20px, 5.4vw, 44px)/1.2 var(--font);
+  text-shadow: 0 3px 18px rgba(0, 0, 0, .95), 0 0 2px #000; }
+.tour-end { position: fixed; inset: 0; z-index: 8; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2vh; text-align: center;
+  background: radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, .25), rgba(0, 0, 0, .7)); animation: tourIn .8s ease both; }
+@keyframes tourIn { from { opacity: 0; } }
+.tour-end-k { font: 600 clamp(11px, 2.6vw, 18px) var(--font); letter-spacing: .3em; text-transform: uppercase; color: var(--muted); }
+.tour-end-t { font: 800 clamp(40px, 11vw, 96px)/1 var(--font); }
+.tour-end-t em { font-style: normal; color: var(--working); }
+.tour-end-r { font: 500 clamp(12px, 3vw, 22px) var(--mono); color: var(--idle); }
+.tour-end-b { margin-top: 6vh; font: 800 clamp(28px, 7.5vw, 64px) var(--font); }
+body.tour:has(.panel.open) .tour-caption { bottom: auto; top: 13vh; } /* the panel takes the bottom: captions go up */
+body.tour-ending #toast, body.tour-ending .tour-caption { display: none !important; }
