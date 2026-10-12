@@ -90,6 +90,7 @@
   addEventListener('pointerdown', startMusic, { once: false, capture: true });
   addEventListener('keydown', e => { if (e.key.toLowerCase() === 'm' && !typing(e)) mute.click(); else startMusic(); }, { capture: true });
   if (muted || level === 0) volHint.hidden = true;
+  music.addEventListener('error', () => { started = false; volHint.hidden = false; volHint.textContent = 'sem trilha: veja o README'; });
   applySound();
 
   // ---- data ----

@@ -53,7 +53,7 @@ You choose the permission mode (accept edits, plan only, auto or default). With 
 | `Enter` | near a planet: open its channel |
 | drag / wheel | orbit / zoom the camera |
 | `Esc` | back to the centre |
-| `M` | soundtrack on/off (volume under the hangar) |
+| `M` | soundtrack on/off (volume under the hangar; see Credits for the file) |
 
 ## How it works
 
@@ -86,7 +86,7 @@ npm run demo         # every state, for visual work
 ## Credits
 
 - Inspired by *Interstellar* (2014) and its black hole, Gargantua. Built alongside [pokemon-coworking](https://github.com/adrianoads910-max/pokemon-coworking) and the original [coworking-agents](https://github.com/ChaconLucas/coworking-agents) by Lucas Chacon.
-- Soundtrack: *Into the Starfield (Main Theme)* from *Starfield* (Bethesda Softworks), composed by Inon Zur. It belongs to its owners and is included only for personal, non-commercial use.
+- Soundtrack: the player looks for `public/sound/into-the-starfield.mp3`. The track it was made with, *Into the Starfield (Main Theme)* from *Starfield* (Bethesda Softworks, composed by Inon Zur), is not distributed here; put your own copy, or any mp3, at that path.
 - *Interstellar*, *Star Wars*, the Endurance, the Millennium Falcon and the Death Star belong to their owners. This is an unofficial fan project; the ships are drawn procedurally.
 
 MIT License (code only).
