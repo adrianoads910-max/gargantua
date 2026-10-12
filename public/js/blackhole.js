@@ -96,9 +96,12 @@ vec3 sky(vec3 d){
       col += smoothstep(.32, 0., length(f)) * b * b * tw * mix(vec3(1., .82, .62), vec3(.68, .8, 1.), hash3(id + 3.1)) * 1.6;
     }
   }
-  float lon = atan(d.z, d.x), lat = asin(clamp(d.y, -1., 1.));
-  float n = fbm(vec2(lon * 1.7, lat * 3.1) + 11.);
-  float band = exp(-pow((lat - .35 * sin(lon * .7)) * 2.4, 2.));
+  // the milky band. Noise is projected on the three axis planes and blended (no longitude, so no seam
+  // where the angle wraps), and the band's wave has a whole number of periods around the sky.
+  vec3 wgt = abs(d) / (abs(d.x) + abs(d.y) + abs(d.z));
+  float n = fbm(d.zy * 2.6 + 11.) * wgt.x + fbm(d.xz * 2.6 + 3.) * wgt.y + fbm(d.xy * 2.6 + 7.) * wgt.z;
+  float lat = asin(clamp(d.y, -1., 1.));
+  float band = exp(-pow((lat - .35 * (d.x * .8 + d.z * .6)) * 2.4, 2.));
   col += vec3(.16, .10, .07) * pow(n, 2.6) * band * 1.4 + vec3(.03, .035, .05) * n;
   // distant nebulae, in the colours emission nebulae really have
   col += nebula(d, vec3(-.06, -.25, -1.), .17, vec3(.55, .10, .22), vec3(.98, .45, .58), 1.3) * .5;   // hydrogen-alpha rose
