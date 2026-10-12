@@ -1,6 +1,8 @@
 'use strict';
 // ?tour — a scripted camera tour for screen recording (best with the demo: npm run demo).
-// Space starts it, R restarts. ?legenda=1 burns the narration in as captions.
+// Space or a click on the prompt starts it; ?tour=5 starts by itself after a 5-second countdown
+// (no need for the page to have keyboard focus while a recorder is open). R restarts.
+// ?legenda=1 burns the narration in as captions.
 // The timeline follows the narration of the showcase video, about 37 s.
 
 (function () {
@@ -20,7 +22,8 @@
   ];
 
   const el = (cls, html) => { const d = document.createElement('div'); d.className = cls; d.innerHTML = html; document.body.appendChild(d); return d; };
-  const hint = el('tour-hint', '<b>Modo tour</b> · comece a gravar e aperte <kbd>Espaço</kbd> · <kbd>R</kbd> recomeça');
+  const hint = el('tour-hint', '<b>Modo tour</b> · comece a gravar e clique aqui ou aperte <kbd>Espaço</kbd>');
+  hint.addEventListener('click', () => { if (!running) start(); });
   const caption = el('tour-caption', '');
   const end = el('tour-end', '<div class="tour-end-k">Node.js · WebGL · zero dependências</div><div class="tour-end-t">Código <em>aberto</em></div><div class="tour-end-r">github.com/adrianoads910-max/gargantua</div><div class="tour-end-b">Link na bio ↓</div>');
   caption.hidden = params.get('legenda') !== '1';
@@ -82,6 +85,18 @@
     at(38.5, 'stop', () => { running = false; spin = 0; }, t);
   }
   requestAnimationFrame(tick);
+
+  const auto = Number(params.get('tour'));
+  if (auto > 0) { // countdown, then start by itself
+    let left = Math.ceil(auto);
+    const count = () => {
+      if (running) return;
+      if (left <= 0) { start(); return; }
+      hint.innerHTML = `<b>Modo tour</b> · começa em <b class="tour-count">${left}</b>`;
+      left--; setTimeout(count, 1000);
+    };
+    count();
+  }
 
   addEventListener('keydown', e => {
     if (e.key === ' ') { e.preventDefault(); e.stopImmediatePropagation(); if (!running) start(); }

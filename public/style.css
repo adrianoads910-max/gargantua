@@ -215,3 +215,4 @@ body.tour .panel { max-height: 44vh; }
 .tour-end-b { margin-top: 6vh; font: 800 clamp(28px, 7.5vw, 64px) var(--font); }
 body.tour:has(.panel.open) .tour-caption { bottom: auto; top: 13vh; } /* the panel takes the bottom: captions go up */
 body.tour-ending #toast, body.tour-ending .tour-caption { display: none !important; }
+.tour-hint { cursor: pointer; } .tour-count { color: var(--working); font-size: 1.4em; }
