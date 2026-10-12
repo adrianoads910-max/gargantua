@@ -1,0 +1,39 @@
+{
+  "name": "gargantua",
+  "version": "0.1.0",
+  "description": "An Interstellar-inspired galaxy for your AI coding agents: Claude Code sessions orbit a ray-traced black hole as planets, subagents are their moons, idle sessions spiral into the event horizon.",
+  "bin": {
+    "gargantua": "bin/gargantua.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node bin/gargantua.js",
+    "demo": "node bin/gargantua.js --demo",
+    "test": "node test/run.js"
+  },
+  "keywords": [
+    "claude-code",
+    "ai",
+    "agents",
+    "dashboard",
+    "black-hole",
+    "interstellar",
+    "webgl"
+  ],
+  "author": "Adriano",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianoads910-max/gargantua.git"
+  },
+  "homepage": "https://github.com/adrianoads910-max/gargantua#readme",
+  "files": [
+    "bin",
+    "src",
+    "public",
+    "README.md",
+    "LICENSE"
+  ]
+}
