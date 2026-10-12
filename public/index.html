@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gargantua</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- bottom to top: the unbent sky, bodies behind the hole, the hole (its alpha masks them), bodies in front -->
+  <canvas id="sky"></canvas>
+  <canvas id="fxb"></canvas>
+  <canvas id="bh"></canvas>
+  <canvas id="fx"></canvas>
+
+  <header class="brand">
+    <button id="home" title="Voltar ao centro (Esc)">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="6" fill="#000"/><ellipse cx="16" cy="16" rx="14" ry="3.2" fill="none" stroke="#ffcf9a" stroke-width="1.6"/><path d="M7 14a9.5 9.5 0 0 1 18 0" fill="none" stroke="#fff1dc" stroke-width="1.3"/></svg>
+      <span><b>GARGANTUA</b><small>galáxia de agentes</small></span>
+    </button>
+    <span id="demo" class="demo" hidden>DEMO</span>
+  </header>
+
+  <nav class="hangar" aria-label="Escolha sua nave">
+    <div class="hangar-title">Hangar</div>
+    <div id="ships"></div>
+    <div class="sound">
+      <div class="hangar-title">Trilha</div>
+      <div class="soundrow">
+        <button id="mute" title="Som ligado/desligado (M)" aria-label="Som ligado/desligado">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="waves" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path class="x" d="M16.5 9.5l5 5m0-5l-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        </button>
+        <input id="vol" type="range" min="0" max="100" step="1" aria-label="Volume">
+      </div>
+      <small id="vol-hint" class="vol-hint">clique na galáxia para tocar</small>
+    </div>
+  </nav>
+  <audio id="music" src="sound/into-the-starfield.mp3" loop preload="none"></audio>
+
+  <section class="counters" aria-live="polite">
+    <div><b id="n-planets">0</b>planetas</div>
+    <div class="working"><b id="n-working">0</b>trabalhando</div>
+    <div id="c-ask" class="ask"><b id="n-ask">0</b>chamando você</div>
+    <div class="idle"><b id="n-idle">0</b>sua vez</div>
+    <div><b id="n-moons">0</b>luas</div>
+    <div class="falling"><b id="n-falling">0</b>caindo</div>
+  </section>
+
+  <footer class="legend">
+    <span><i class="sw planet"></i>planeta = sessão</span>
+    <span><i class="sw moon"></i>lua = subagente</span>
+    <span><i class="sw fall"></i>sessão parada cai no Gargantua</span>
+    <span><i class="sw ship"></i>a nave = você</span>
+  </footer>
+  <div class="hint"><kbd>W A S D</kbd>/<kbd>setas</kbd> pilotar · <kbd>Q</kbd><kbd>E</kbd> descer/subir · <kbd>Shift</kbd> turbo · <kbd>P</kbd> piloto automático · arraste para girar · role para aproximar · <kbd>Esc</kbd> centro · <kbd>M</kbd> som</div>
+  <div id="near" class="near" hidden></div>
+  <div id="toast" class="toast" hidden></div>
+
+  <div id="empty" class="empty" hidden>
+    <h1>Nenhuma sessão por perto</h1>
+    <p>Abra o Claude Code em algum repositório e ele aparece aqui como planeta. Ou rode <code>npm run demo</code>.</p>
+  </div>
+
+  <aside id="panel" class="panel" aria-live="polite"></aside>
+  <div id="tip" class="tip" hidden></div>
+
+  <script src="js/camera.js"></script>
+  <script src="js/blackhole.js"></script>
+  <script src="js/textures.js"></script>
+  <script src="js/ships.js"></script>
+  <script src="js/galaxy.js"></script>
+  <script src="js/panel.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
